@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Title</title>
+</head>
+<body>
+    <div class="container">
+        <form action="#" th:action="@{/save}" class="form-group" th:object="${contactDto}" method="post">
+            <input type="hidden" id="id" name="id" th:field="*{id}">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" th:field="*{name}">
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="text" class="form-control" id="age" name="age" th:field="*{age}">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" class="form-control" id="phone" name="phone" th:field="*{phone}">
+            </div>
+            <div class="form-group">
+                <label for="nickname">Nickname</label>
+                <input type="text" class="form-control" id="nickname" name="nickname" th:field="*{nickname}">
+            </div>
+            <button type="submit" class="btn btn-success">Save</button>
+        </form>
+    </div>
+</body>
+</html>
