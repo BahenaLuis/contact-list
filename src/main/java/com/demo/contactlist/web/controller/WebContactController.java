@@ -2,7 +2,9 @@ package com.demo.contactlist.web.controller;
 
 import com.demo.contactlist.dto.ContactDto;
 import com.demo.contactlist.dto.request.CreateContactRequest;
+import com.demo.contactlist.dto.request.UpdateContactRequest;
 import com.demo.contactlist.service.ContactService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -58,8 +60,16 @@ public class WebContactController {
     }
 
     @RequestMapping(path = "/save", method = RequestMethod.POST)
-    public String save(Model model, CreateContactRequest createContactRequest) {
-        this.contactService.saveContact(createContactRequest);
+    public String save(Model model, ContactDto contactDto) {
+        ModelMapper modelMapper = new ModelMapper();
+        if (contactDto.getId() != null) {
+            UpdateContactRequest updateContactRequest = modelMapper.map(contactDto, UpdateContactRequest.class);
+            this.contactService.updateContact(contactDto.getId(), updateContactRequest);
+        } else {
+            CreateContactRequest createContactRequest = modelMapper.map(contactDto, CreateContactRequest.class);
+            this.contactService.saveContact(createContactRequest);
+        }
+
         return "redirect:/";
     }
 

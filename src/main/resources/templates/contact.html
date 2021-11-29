@@ -7,9 +7,16 @@
     <title>Contact list</title>
 </head>
 <body>
+    <div class="container m-t-15 m-b-15">
+        <h1>Contact list</h1>
+    </div>
     <div class="container">
 
-        <a class="btn btn-primary" href="/save/0" role="button">New</a>
+        <div class="float-right">
+            <a class="btn btn-primary" href="/save/0" role="button">New</a>
+        </div>
+        <br>
+
         <table class="table" id="contacts">
             <thead>
                 <tr>
@@ -46,8 +53,12 @@
                th:text=${pageNumber}
                th:class="${pageNumber==contactDtoPage.number + 1} ? active"></a>
         </div>
-    </div>
 
+        <br>
+        <div class="float-left">
+            <a class="btn btn-primary" href="/logout" role="button">Sign out</a>
+        </div>
+    </div>
 
 </body>
 </html>
