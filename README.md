@@ -31,8 +31,7 @@ Todas las peticiones requieren autenticación basica, con usuario y contraseña.
 - POST -> https://contact-list-pinnacle.herokuapp.com/api/contact
 - Recibe un body con la información del contacto
 - Payload de ejemplo (nombre y teléfono requeridos)
-<br>
-{
+- {
     "name": "Francisco Mendez",
     "phone": "6311245785",
     "age": 32,
@@ -58,8 +57,7 @@ Todas las peticiones requieren autenticación basica, con usuario y contraseña.
 - PUT -> https://contact-list-pinnacle.herokuapp.com/api/contact/{id}
 - Recibe un body con la información a modificar del contacto
 - Payload de ejemplo (ningún campo es requerido)
-<br>
-{
+- {
     "name": "Francisco Mendez",
     "phone": "6311245785",
     "age": 32,
