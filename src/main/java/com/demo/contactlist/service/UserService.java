@@ -24,6 +24,7 @@ public class UserService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException(username);
         }
+        //TODO - Handle a encoder for user password
         String password = "{noop}" + user.getPassword();
         return new User(user.getEmail(), password, new ArrayList<>());
     }

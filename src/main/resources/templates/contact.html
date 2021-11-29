@@ -7,14 +7,19 @@
     <title>Contact list</title>
 </head>
 <body>
+    <br>
     <div class="container m-t-15 m-b-15">
         <h1>Contact list</h1>
     </div>
     <div class="container">
 
+
         <div class="float-right">
-            <a class="btn btn-primary" href="/save/0" role="button">New</a>
+            <a class="btn btn-primary" style="width:150px" href="/save/0" role="button">New</a>
         </div>
+
+        <br>
+        <br>
         <br>
 
         <table class="table" id="contacts">
@@ -33,30 +38,36 @@
                         <a th:if="${sortDir_phone != null}" th:href="@{'?page=' + ${currentPage} + '&sort=phone,' + ${sortDir_phone} }">Phone</a>
                         <a th:if="${sortDir_phone == null}" th:href="@{'?page=' + ${currentPage} + '&sort=phone' }">Phone</a>
                     </th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <tr th:each="contactDto: ${ contactDtoPage.content }">
                     <td th:text="${ contactDto.name }"></td>
-                    <td th:text="${ contactDto.id }"></td>
+                    <td th:text="${ contactDto.age }"></td>
                     <td th:text="${ contactDto.nickname }"></td>
                     <td th:text="${ contactDto.phone }"></td>
-                    <td><a th:href="@{'/save/' +${contactDto.id}}">Update</a></td>
-                    <td><a th:href="@{'/delete/' + ${contactDto.id}}">Remove</a></td>
+                    <td><a th:href="@{'/save/' +${contactDto.id}}" class="btn btn-info">Update</a></td>
+                    <td><a th:href="@{'/delete/' + ${contactDto.id}}" class="btn btn-danger">Remove</a></td>
                 </tr>
             </tbody>
         </table>
+        <br>
 
-        <div class="pagination"
-             th:each="pageNumber : ${pageNumbers}">
-            <a th:href="@{'?page=' + ${pageNumber -1 } }"
-               th:text=${pageNumber}
-               th:class="${pageNumber==contactDtoPage.number + 1} ? active"></a>
-        </div>
+        <nav aria-label="Pagination" class="float-right">
+            <ul class="pagination">
+                <li  class="page-item" th:each="pageNumber : ${pageNumbers}">
+                    <a class="page-link" th:href="@{'?page=' + ${pageNumber -1 } }" th:text=${pageNumber}></a>
+                </li>
+
+            </ul>
+        </nav>
+        <br>
 
         <br>
         <div class="float-left">
-            <a class="btn btn-primary" href="/logout" role="button">Sign out</a>
+            <a class="btn btn-info" href="/logout" role="button">Sign out</a>
         </div>
     </div>
 

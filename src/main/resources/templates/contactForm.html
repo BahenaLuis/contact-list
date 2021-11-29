@@ -8,26 +8,45 @@
 </head>
 <body>
     <div class="container">
-        <form action="#" th:action="@{/save}" class="form-group" th:object="${contactDto}" method="post">
-            <input type="hidden" id="id" name="id" th:field="*{id}">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" name="name" th:field="*{name}">
+
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
+
+                <br>
+                <br>
+                <div syle="padding:25px !important">
+                    <h2>New contact</h2>
+                </div>
+                <form action="#" th:action="@{/save}" class="form-group" th:object="${contactDto}" method="post">
+                    <input type="hidden" id="id" name="id" th:field="*{id}">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" maxlength="50" class="form-control" id="name" name="name" th:field="*{name}">
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" maxlength="3" class="form-control" id="age" name="age" th:field="*{age}">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" maxlength="10" class="form-control" id="phone" name="phone" th:field="*{phone}">
+                    </div>
+                    <div class="form-group">
+                        <label for="nickname">Nickname</label>
+                        <input type="text" maxlength="30" class="form-control" id="nickname" name="nickname" th:field="*{nickname}">
+                    </div>
+                    <div class="w-100">
+                        <a class="btn btn-info" href="/" role="button" style="width:48%">Back</a>
+                        <button type="submit" class="btn btn-success w-50">Save</button>
+                    </div>
+                </form>
+
             </div>
-            <div class="form-group">
-                <label for="age">Age</label>
-                <input type="text" class="form-control" id="age" name="age" th:field="*{age}">
-            </div>
-            <div class="form-group">
-                <label for="phone">Phone</label>
-                <input type="text" class="form-control" id="phone" name="phone" th:field="*{phone}">
-            </div>
-            <div class="form-group">
-                <label for="nickname">Nickname</label>
-                <input type="text" class="form-control" id="nickname" name="nickname" th:field="*{nickname}">
-            </div>
-            <button type="submit" class="btn btn-success">Save</button>
-        </form>
+            <div class="col"></div>
+        </div>
+
+
     </div>
 </body>
 </html>
