@@ -35,6 +35,9 @@ Todas las peticiones requieren autenticación basica, con usuario y contraseña.
 
 - Obtiene un listado de contactos ligado al usuario
 - GET -> https://contact-list-pinnacle.herokuapp.com/api/contact
+- Podemos pasar como parametros la pagina, el tamaño de ella, el campo y dirección de ordenamiento
+- Ejemplo: https://contact-list-pinnacle.herokuapp.com/api/contact?page=0&size=5&sort=name,desc
+
 
 <br>
 
