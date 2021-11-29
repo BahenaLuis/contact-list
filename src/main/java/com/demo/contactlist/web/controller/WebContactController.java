@@ -1,6 +1,7 @@
 package com.demo.contactlist.web.controller;
 
 import com.demo.contactlist.dto.ContactDto;
+import com.demo.contactlist.dto.request.CreateContactRequest;
 import com.demo.contactlist.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -57,8 +58,8 @@ public class WebContactController {
     }
 
     @RequestMapping(path = "/save", method = RequestMethod.POST)
-    public String save(Model model, ContactDto contactDto) {
-        this.contactService.saveContact(contactDto);
+    public String save(Model model, CreateContactRequest createContactRequest) {
+        this.contactService.saveContact(createContactRequest);
         return "redirect:/";
     }
 

@@ -1,6 +1,9 @@
 package com.demo.contactlist.service;
 
 import com.demo.contactlist.dto.ContactDto;
+import com.demo.contactlist.dto.request.CreateContactRequest;
+import com.demo.contactlist.dto.request.UpdateContactRequest;
+import com.demo.contactlist.exception.ResourceNotFoundException;
 import com.demo.contactlist.persistence.entity.Contact;
 import com.demo.contactlist.persistence.entity.User;
 import com.demo.contactlist.persistence.repository.ContactRepository;
@@ -29,39 +32,39 @@ public class ContactService {
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
     }
 
-    public ContactDto saveContact(ContactDto contactDto) {
-        if (contactDto.getName() == null || contactDto.getName().isEmpty()) {
+    public ContactDto saveContact(CreateContactRequest createContactRequest) {
+        if (createContactRequest.getName() == null || createContactRequest.getName().isEmpty()) {
             throw new RuntimeException("Name field is required");
         }
-        if (contactDto.getPhone() == null || contactDto.getPhone().isEmpty()) {
+        if (createContactRequest.getPhone() == null || createContactRequest.getPhone().isEmpty()) {
             throw new RuntimeException("Phone field is required");
         }
         Contact contact = new Contact();
-        contact.setName(contactDto.getName());
-        contact.setAge(contactDto.getAge());
-        contact.setNickname(contactDto.getNickname());
-        contact.setPhone(contactDto.getPhone());
+        contact.setName(createContactRequest.getName());
+        contact.setAge(createContactRequest.getAge());
+        contact.setNickname(createContactRequest.getNickname());
+        contact.setPhone(createContactRequest.getPhone());
         contact.setUserId(this.getUserSession().getId());
         contact = this.contactRepository.save(contact);
         return modelMapper.map(contact, ContactDto.class);
     }
 
-    public ContactDto updateContact(Integer contactId, ContactDto contactDto) {
+    public ContactDto updateContact(Integer contactId, UpdateContactRequest updateContactRequest) {
         Contact contact = this.contactRepository.findByIdAndUserIdAndDeletedFalse(contactId, this.getUserSession().getId());
         if (contact == null) {
-            throw new RuntimeException("Record not found");
+            throw new ResourceNotFoundException("Record not found");
         }
-        if (contactDto.getName() != null) {
-            contact.setName(contactDto.getName());
+        if (updateContactRequest.getName() != null) {
+            contact.setName(updateContactRequest.getName());
         }
-        if (contactDto.getAge() != null) {
-            contact.setAge(contactDto.getAge());
+        if (updateContactRequest.getAge() != null) {
+            contact.setAge(updateContactRequest.getAge());
         }
-        if (contactDto.getNickname() != null) {
-            contact.setNickname(contactDto.getNickname());
+        if (updateContactRequest.getNickname() != null) {
+            contact.setNickname(updateContactRequest.getNickname());
         }
-        if (contactDto.getPhone() != null) {
-            contact.setPhone(contactDto.getPhone());
+        if (updateContactRequest.getPhone() != null) {
+            contact.setPhone(updateContactRequest.getPhone());
         }
         contact = this.contactRepository.save(contact);
         return modelMapper.map(contact, ContactDto.class);
@@ -70,7 +73,7 @@ public class ContactService {
     public ContactDto deleteContact(Integer contactId) {
         Contact contact = this.contactRepository.findByIdAndUserIdAndDeletedFalse(contactId, this.getUserSession().getId());
         if (contact == null) {
-            throw new RuntimeException("Record not found");
+            throw new ResourceNotFoundException("Record not found");
         }
         contact.setDeleted(true);
         contact = this.contactRepository.save(contact);
@@ -80,7 +83,7 @@ public class ContactService {
     public ContactDto getContactById(Integer id) {
         Contact contact = this.contactRepository.findByIdAndUserIdAndDeletedFalse(id, this.getUserSession().getId());
         if (contact == null) {
-            throw new RuntimeException("Record not found");
+            throw new ResourceNotFoundException("Record not found");
         }
         return modelMapper.map(contact, ContactDto.class);
     }

@@ -1,11 +1,15 @@
 package com.demo.contactlist.controller;
 
 import com.demo.contactlist.dto.ContactDto;
+import com.demo.contactlist.dto.request.CreateContactRequest;
+import com.demo.contactlist.dto.request.UpdateContactRequest;
 import com.demo.contactlist.service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("api")
@@ -26,13 +30,13 @@ public class ContactController {
     }
 
     @RequestMapping(path = "/contact", method = RequestMethod.POST)
-    public ContactDto save(ContactDto contactDto) {
-        return this.contactService.saveContact(contactDto);
+    public ContactDto save(@Valid @RequestBody CreateContactRequest createContactRequest) {
+        return this.contactService.saveContact(createContactRequest);
     }
 
     @RequestMapping(value = "/contact/{id}", method = RequestMethod.PUT)
-    public ContactDto update(ContactDto contactDto, @PathVariable Integer id) {
-        return this.contactService.saveContact(contactDto);
+    public ContactDto update(@Valid @RequestBody UpdateContactRequest updateContactRequest, @PathVariable Integer id) {
+        return this.contactService.updateContact(id, updateContactRequest);
     }
 
     @RequestMapping(value = "/contact/{id}", method = RequestMethod.DELETE)
