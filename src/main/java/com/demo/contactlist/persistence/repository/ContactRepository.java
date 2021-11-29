@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ContactRepository extends JpaRepository<Contact, Integer> {
-    Page<Contact> findByDeletedFalse(Pageable pageable);
+    Page<Contact> findByDeletedFalseAndUserId(Integer userId, Pageable pageable);
+    Contact findByIdAndUserIdAndDeletedFalse(Integer id, Integer userId);
     List<Contact> findByDeletedFalse();
 }
