@@ -48,8 +48,8 @@
                     <td th:text="${ contactDto.age }"></td>
                     <td th:text="${ contactDto.nickname }"></td>
                     <td th:text="${ contactDto.phone }"></td>
-                    <td><a th:href="@{'/save/' +${contactDto.id}}" class="btn btn-info">Actualizar</a></td>
-                    <td><a th:href="@{'/delete/' + ${contactDto.id}}" class="btn btn-danger">Eliminar</a></td>
+                    <td><a th:href="@{'/save/' +${contactDto.id}}" class="btn btn-info">Modificar</a></td>
+                    <td><a th:href="@{'/delete/' + ${contactDto.id}}" class="btn btn-danger">Quitar</a></td>
                 </tr>
             </tbody>
         </table>
